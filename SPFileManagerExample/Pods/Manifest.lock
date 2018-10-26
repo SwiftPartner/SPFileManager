@@ -1,0 +1,16 @@
+PODS:
+  - SPFileManager (0.0.1)
+
+DEPENDENCIES:
+  - SPFileManager (from `../`)
+
+EXTERNAL SOURCES:
+  SPFileManager:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SPFileManager: 3772c6c074327c514f868dd718a4938dce38b9f6
+
+PODFILE CHECKSUM: e1e0cded8606a4b61f006df6b03384fd1e3340f4
+
+COCOAPODS: 1.5.3

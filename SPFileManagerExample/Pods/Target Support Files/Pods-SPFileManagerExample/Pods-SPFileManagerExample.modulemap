@@ -1,0 +1,6 @@
+framework module Pods_SPFileManagerExample {
+  umbrella header "Pods-SPFileManagerExample-umbrella.h"
+
+  export *
+  module * { export * }
+}
