@@ -15,5 +15,9 @@ extension FileManager {
         return directory
     }
     
+    public static var cacheDirectory: String? {
+        return FileManager.default.systemDirectory(directory: .cachesDirectory)
+    }
+    
 
 }

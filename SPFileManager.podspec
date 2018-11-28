@@ -4,7 +4,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SPFileManager"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "Swift文件管理"
 
   # Pod描述，要不s.summary的字数多

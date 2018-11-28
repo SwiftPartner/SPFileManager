@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum FileManagerError: Error {
+public enum FileManagerError: Error {
     case directoryNotExists
     case fileNotExists
     case fileNotReachable

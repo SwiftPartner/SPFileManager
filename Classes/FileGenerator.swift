@@ -6,7 +6,7 @@
 //  Copyright © 2018 bechoed. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CommonCrypto
 
 extension FileManager {
@@ -19,6 +19,35 @@ extension FileManager {
         let dateStamp  = Date().timeIntervalSince1970
         let fileName = MD5(string: "\(dateStamp)")
         return fileName + suffix
+    }
+    
+    /// 保存图片到文件夹，同步执行
+    ///
+    /// - Parameters:
+    ///   - image: 图片
+    ///   - directory: 文件夹
+    /// - Returns: 保存成功返回(图片路径，nil),失败返回(nil, Error?)
+    public func save(image: UIImage, in directory: String) -> (String?, Error?){
+        let imageName = generateMD5FileName()
+        do {
+            let imagePath = try FileManager.default.createfilePath(with: imageName, in: directory)
+            let IDImageURL = URL(fileURLWithPath: imagePath, isDirectory: false)
+            try image.pngData()?.write(to: IDImageURL, options: .atomicWrite)
+            return (imagePath, nil)
+        } catch {
+            return (nil, error)
+        }
+    }
+    
+    /// 保存图片到缓存文件夹
+    ///
+    /// - Parameter image: 图片对象
+    /// - Returns: 保存成功返回(图片路径，nil),失败返回(nil, Error?)
+    public func saveImgageInCache(image: UIImage) -> (String?, Error?) {
+        guard let cacheDir = FileManager.cacheDirectory else {
+            return (nil, FileManagerError.directoryNotExists)
+        }
+        return save(image: image, in: cacheDir)
     }
     
     
