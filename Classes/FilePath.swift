@@ -12,7 +12,7 @@ extension FileManager {
     
     public func createfilePath(with fileName: String, in directory: String) throws -> String {
         let directoryURL = NSURL(fileURLWithPath: directory, isDirectory: true)
-        if directoryURL.checkResourceIsReachableAndReturnError(nil) {
+        if !directoryURL.checkResourceIsReachableAndReturnError(nil) {
             throw FileManagerError.fileNotReachable
         }
         let isDirectory = UnsafeMutablePointer<ObjCBool>(bitPattern: 0)
