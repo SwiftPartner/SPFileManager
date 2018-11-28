@@ -26,28 +26,24 @@ extension FileManager {
     /// - Parameters:
     ///   - image: 图片
     ///   - directory: 文件夹
-    /// - Returns: 保存成功返回(图片路径，nil),失败返回(nil, Error?)
-    public func save(image: UIImage, in directory: String) -> (String?, Error?){
+    /// - Returns: 图片路径
+    public func save(image: UIImage, in directory: String) throws -> String {
         let imageName = generateMD5FileName()
-        do {
-            let imagePath = try FileManager.default.createfilePath(with: imageName, in: directory)
-            let IDImageURL = URL(fileURLWithPath: imagePath, isDirectory: false)
-            try image.pngData()?.write(to: IDImageURL, options: .atomicWrite)
-            return (imagePath, nil)
-        } catch {
-            return (nil, error)
-        }
+        let imagePath = try FileManager.default.createfilePath(with: imageName, in: directory)
+        let IDImageURL = URL(fileURLWithPath: imagePath, isDirectory: false)
+        try image.pngData()?.write(to: IDImageURL, options: .atomicWrite)
+        return imagePath
     }
     
     /// 保存图片到缓存文件夹
     ///
     /// - Parameter image: 图片对象
-    /// - Returns: 保存成功返回(图片路径，nil),失败返回(nil, Error?)
-    public func saveImgageInCache(image: UIImage) -> (String?, Error?) {
+    /// - Returns: 保存成功返回图片路径
+    public func saveImgageInCache(image: UIImage) throws -> String {
         guard let cacheDir = FileManager.cacheDirectory else {
-            return (nil, FileManagerError.directoryNotExists)
+            throw FileManagerError.directoryNotExists
         }
-        return save(image: image, in: cacheDir)
+        return try save(image: image, in: cacheDir)
     }
     
     
