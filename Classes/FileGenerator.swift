@@ -16,7 +16,7 @@ extension FileManager {
     /// - Parameter suffix: 后缀
     /// - Returns: 当前时间戳的md5值 + 后缀生成的字符串
     public func generateMD5FileName(suffix: String = "") -> String {
-        let dateStamp  = Date().timeIntervalSince1970
+        let dateStamp  = "\(arc4random()).\(Date().timeIntervalSince1970).\(arc4random())"
         let fileName = MD5(string: "\(dateStamp)")
         return fileName + suffix
     }
